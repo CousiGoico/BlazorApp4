@@ -1,0 +1,113 @@
+﻿
+@{
+    if (Columns != null)
+    {
+        <table>
+            <tr>
+                <td>
+                    <div style="width: 400px; overflow:hidden; display: inline; float:left; position:relative;" id="DivHeaders">
+                        <table>
+                            <thead>
+                                <tr>
+                                    @{
+                                        foreach (var column in Columns)
+                                        {
+                                            var widthSring = $"{column.Width}px";
+                                            <th >
+                                                <div style="width: @widthSring" @ref="column.Element"@onmousedown="(args) => OnMouseDown(column, args)" @onmousemove="OnMouseMove" @onmouseup="OnMouseUp">
+                                                    @column.Title
+                                                    <span class="oi oi-ellipses ml-3" style="cursor:pointer"></span>
+                                                </div> 
+                                            </th>
+                                        }
+                                    }
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div style="width:200px; display: inline; float:left; position:relative;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{
+                        if (Data != null)
+                        {
+                            <div style=" width:400px; height: 400px; overflow-x: scroll; overflow-y: hidden; display: inline; float:left; position:relative;" id="DivData" @onscroll="ScrollingLeft">
+                                <table>
+                                    <thead>
+                                        @{
+                                            foreach (var person in Data)
+                                            {
+                                                <tr>
+                                                    @{
+
+                                                        foreach (var column in Columns)
+                                                        {
+                                                            var widthSring = $"{column.Width}px";
+                                                            <td width="@column.Width">
+                                                                <div style="width: @widthSring">
+                                                                    @person.GetType().GetProperty(column.Field).GetValue(person, null)
+                                                                </div>
+                                                            </td>
+                                                        }
+                                                    }
+
+                                                </tr>
+                                            }
+                                        }
+                                    </thead>
+                                </table>
+                            </div>
+                        }
+                    }
+
+                </td>
+                <td>
+                    @{
+                        if (Data != null)
+                        {
+                            <div style="height:400px; overflow-y:scroll; overflow-x:hidden; display: inline; float:left; position:relative;" @onscroll="Scrolling" id="DivActions">
+                                <table>
+                                    <thead>
+                                        @{
+                                            foreach (var person in Data)
+                                            {
+                                                <tr>
+                                                    @{
+                                                        foreach (var action in Actions)
+                                                        {
+                                                            <td>
+                                                                <span class="@action.Icon" title="@action.Name" @onclick="() => action.Function.Invoke(person)"></span>
+                                                            </td>
+                                                        }
+                                                    }
+
+                                                </tr>
+                                            }
+                                        }
+                                    </thead>
+                                </table>
+                            </div>
+                        }
+
+                    }
+
+                </td>
+            </tr>
+        </table>
+        <label>Anchura: @ControlWidth</label>
+        <label>Posición inicial: @InitialPosition</label>
+        <label>Posición actual: @Position</label>
+    }
+}

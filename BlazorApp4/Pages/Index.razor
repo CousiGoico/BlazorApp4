@@ -1,0 +1,7 @@
+﻿@page "/"
+
+@{ 
+    if (Columns != null && Data != null && Actions != null) { 
+        <DataList Columns="Columns" Data="Data" Actions="Actions"></DataList>    
+    }
+}

@@ -1,0 +1,19 @@
+﻿@typeparam TItem
+
+<table border="1">
+    <thead>
+        <tr>
+            @TableHeader
+        </tr>
+    </thead>
+    <tbody>
+        @{ foreach (TItem people in Data) {
+                <tr>
+                    @TableRow(people)
+                </tr>    
+            } 
+        }
+
+    </tbody>
+</table>
+

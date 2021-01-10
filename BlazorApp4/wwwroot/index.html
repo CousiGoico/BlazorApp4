@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>BlazorApp4</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="BlazorApp4.styles.css" rel="stylesheet" />
+    <script type="text/javascript">
+        window.setScrollTop = function () {
+            document.getElementById("DivData").scrollTop = document.getElementById("DivActions").scrollTop;
+            return document.getElementById("DivActions").scrollTop;
+        };
+        window.setScrollLeft = function () {
+            document.getElementById("DivHeaders").scrollLeft = document.getElementById("DivData").scrollLeft;
+            return document.getElementById("DivData").scrollLeft;
+        };
+        window.setColumnWidth = function (element, width) {
+            console.log(element);
+            console.log(element.style.width);
+            element.style.width = width + "px";
+            document.getElementById(element.id + "Data").style.width = width + "px";
+            console.log(element.style.width);
+            return width;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">Loading...</div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>
